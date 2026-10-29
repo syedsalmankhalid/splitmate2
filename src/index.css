@@ -1,0 +1,182 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. Tailwind's default palette and type scale are cleared so only
+ * these values can be used — e.g. bg-canvas, border-line, text-ink-secondary, text-lg.
+ */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-transparent: transparent;
+  --color-canvas: #f8f7f4;
+  --color-surface: #ffffff;
+  --color-line: #e8e4de;
+  --color-overlay: rgb(0 0 0 / 0.4);
+
+  --color-primary: #ea580c;
+  --color-primary-hover: #c2410c;
+
+  --color-ink: #1c1917;
+  --color-ink-secondary: #78716c;
+  --color-ink-muted: #a8a29e;
+
+  /* Financial states — only for balances and money. */
+  --color-positive: #065f46;
+  --color-positive-soft: #ecfdf5;
+  --color-negative: #991b1b;
+  --color-negative-soft: #fef2f2;
+  --color-neutral: #57534e;
+  --color-neutral-soft: #f5f5f4;
+
+  --color-pending: #92400e;
+  --color-pending-soft: #fffbeb;
+  --color-danger: #dc2626;
+
+  --color-avatar-bg: #f5f5f4;
+  --color-avatar-ink: #57534e;
+
+  --text-*: initial;
+  --text-2xs: 11px;
+  --text-2xs--line-height: 1;
+  --text-xs: 12px;
+  --text-xs--line-height: 16px;
+  --text-pill: 13px;
+  --text-pill--line-height: 18px;
+  --text-sm: 14px;
+  --text-sm--line-height: 20px;
+  --text-base: 16px;
+  --text-base--line-height: 24px;
+  --text-lg: 18px;
+  --text-lg--line-height: 26px;
+  --text-lg--font-weight: 600;
+  --text-xl: 24px;
+  --text-xl--line-height: 32px;
+  --text-xl--font-weight: 700;
+  --text-2xl: 30px;
+  --text-2xl--line-height: 36px;
+  --text-2xl--font-weight: 800;
+
+  --container-page: 680px;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Tailwind v4 dropped the pointer cursor on buttons; bring it back app-wide. */
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    transition: background-color 120ms ease, border-color 120ms ease;
+  }
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+  .btn-primary:hover {
+    background-color: var(--color-primary-hover);
+  }
+  .btn-secondary {
+    background-color: var(--color-surface);
+    border-color: var(--color-line);
+    color: var(--color-ink);
+  }
+  .btn-secondary:hover {
+    background-color: var(--color-canvas);
+  }
+  .btn-danger {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+  }
+
+  .input {
+    width: 100%;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--color-ink);
+    outline: none;
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+  }
+  .input::placeholder {
+    color: var(--color-ink-muted);
+  }
+  .input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgb(234 88 12 / 0.12);
+  }
+
+  .link {
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+  .link:hover {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+  }
+
+  /* Member status badges. */
+  .badge {
+    display: inline-flex;
+    border-radius: 999px;
+    padding: 2px 8px;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+  }
+
+  /* Expense category labels — neutral, never a financial colour. */
+  .tag {
+    display: inline-flex;
+    border-radius: 999px;
+    padding: 2px 8px;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    background-color: var(--color-avatar-bg);
+    color: var(--color-avatar-ink);
+  }
+
+  /* Balance pills. */
+  .pill {
+    display: inline-flex;
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: var(--text-pill);
+    line-height: var(--text-pill--line-height);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+}
